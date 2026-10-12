@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
       Text("Background opacity: ${opacity.toInt()}%",color=Color.White)
       Slider(value=opacity,onValueChange={opacity=it;saveStyle(skin,it.toInt())},valueRange=0f..100f)
       if (!allowed) Button(onClick={ask.launch(arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION))}) { Text("Enable automatic location") }
-      else Button(onClick={refresh({loading=it},{data=it},{error=it},skin,opacity.toInt()),enabled=!loading) { Text(if(loading) "Loading…" else "Refresh weather") }
+      else Button(onClick={ { refresh({ loading = it }, { data = it }, { error = it }, skin, opacity.toInt()) } }, enabled = !loading) { Text(if (loading) "Loading…" else "Refresh weather") }
       if(error.isNotBlank()) Text(error,color=Color(0xFFFFB4AB))
       data?.let { w ->
        val c=w.current
