@@ -20,8 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import androidx.glance.appwidget.updateAll
-import com.example.pixelglassweather.widget.WeatherWidget
+import com.example.pixelglassweather.widget.WeatherWidgetReceiver
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
@@ -106,7 +105,7 @@ class MainActivity : ComponentActivity() {
 
  private fun saveStyle(skin:String,opacity:Int) {
   getSharedPreferences("weather_widget",MODE_PRIVATE).edit().putString("skin",skin).putInt("opacity",opacity).apply()
-  lifecycleScope.launch { runCatching { WeatherWidget().updateAll(applicationContext) } }
+  lifecycleScope.launch { runCatching { WeatherWidgetReceiver.updateAll(applicationContext) } }
  }
  private fun refresh(onLoading:(Boolean)->Unit,onData:(WeatherResponse)->Unit,onError:(String)->Unit,skin:String,opacity:Int) {
   lifecycleScope.launch {
